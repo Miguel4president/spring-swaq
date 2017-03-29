@@ -1,40 +1,64 @@
 buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
-    }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+  }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
 apply plugin: 'application'
-
-mainClassName = "hello.Application"
-
-jar {
-    baseName = 'bootdemo'
-    version =  '0.0.1'
-}
+apply plugin: 'org.springframework.boot'
 
 repositories {
-    mavenCentral()
+  mavenCentral() // This may seem redundant, but you need it
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    // Spring boot with Jetty & Actuator
-    compile("org.springframework.boot:spring-boot-starter-web") {
-        exclude module: "spring-boot-starter-tomcat"
-    }
-    compile("org.springframework.boot:spring-boot-starter-jetty")
-    compile("org.springframework.boot:spring-boot-starter-actuator")
+  compile("org.springframework.boot:spring-boot-starter-web") {       // Spring boot no tCat
+    exclude module: "spring-boot-starter-tomcat"
+  }
+  compile("org.springframework.boot:spring-boot-starter-jetty")       // not tomcat
+  compile("org.springframework.boot:spring-boot-starter-data-rest")   // Spring data rest stuff (probs replaces web)
+  compile("org.springframework.boot:spring-boot-starter-data-jpa")    // JPA basics
+  compile("org.springframework.boot:spring-boot-starter-actuator")    // Metrics endpoints
+  compile("org.springframework.boot:spring-boot-devtools")            // Allows hot-reloading
+  compile("org.springframework:spring-jdbc")                          // Basic jdbc connection
 
-    // Test Dependencies
-    testCompile("junit:junit")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+  compile("com.h2database:h2")                                        // In memory DB
+  //    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
+
+  // Test Dependencies
+  testCompile("junit:junit")
+  testCompile("org.springframework.boot:spring-boot-starter-test")
 }
+
+
+/* Tasks!! */
+
+// gradle -q hello
+// You can do anything groovy can interpret in here
+task hello {
+  doLast {
+    println 'tutorialspoint'
+    String myName = "Marc";
+    myName.each() {
+        println "${it}"
+    };
+  }
+}
+
+task copy(type: Copy) {
+  description 'Copies the resource directory to the target directory.'
+  from 'resources'
+  into 'target'
+  include('**/*.txt', '**/*.xml', '**/*.properties')
+  println("description applied")
+}
+
+
