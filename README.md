@@ -1,4 +1,4 @@
-# Spring Boot Rest Example App!
+# Spring Boot - Swagger - Rest Example App!
 
 Small example app using some cool features.
 
