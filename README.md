@@ -23,8 +23,9 @@ Not much really! It has 2 JPA entities
 There is a single controller that provides some RESTful APIs for managing the
 game records. (Not one for accounts, so...)
 
-More importantly, we have Swagger Docs, you can find them here:
+More importantly, we have Swagger Docs hosted with your app, you can find them here:
 [localhost swagger page!](http://localhost:8080/swagger-ui.html)
+^^ App needs to be running
 
 They are pretty dope, and since the config is setup already
 the only thing that has to be done is add an annotation above each
