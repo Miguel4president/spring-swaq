@@ -13,7 +13,7 @@ apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
 
 repositories {
-  mavenCentral() // This may seem redundant, but you need it
+  mavenCentral()  // This is just for the remaining dependencies
 }
 
 sourceCompatibility = 1.8
@@ -33,6 +33,10 @@ dependencies {
   compile("com.h2database:h2")                                        // In memory DB
   //    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
 
+// DOCUMENTATION DEPENDENCIES
+  compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+  compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+
   // Test Dependencies
   testCompile("junit:junit")
   testCompile("org.springframework.boot:spring-boot-starter-test")
@@ -40,25 +44,3 @@ dependencies {
 
 
 /* Tasks!! */
-
-// gradle -q hello
-// You can do anything groovy can interpret in here
-task hello {
-  doLast {
-    println 'tutorialspoint'
-    String myName = "Marc";
-    myName.each() {
-        println "${it}"
-    };
-  }
-}
-
-task copy(type: Copy) {
-  description 'Copies the resource directory to the target directory.'
-  from 'resources'
-  into 'target'
-  include('**/*.txt', '**/*.xml', '**/*.properties')
-  println("description applied")
-}
-
-
